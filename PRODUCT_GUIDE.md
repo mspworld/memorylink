@@ -33,7 +33,7 @@ You Code → Git Commit → MemoryLink Scans → ⚠️ Warning or 🚫 Block
 
 | Feature | Description |
 |---------|-------------|
-| **127 Secret Patterns** | AWS, OpenAI, Stripe, Google, Supabase, and 120+ more |
+| **129 Secret Patterns** | AWS, OpenAI, Stripe, Google, Supabase, and 120+ more |
 | **India-Specific** | Aadhaar, PAN, GSTIN, UPI, IFSC, Razorpay, Paytm, PhonePe, Cashfree |
 | **Git Hooks** | Auto-scans on every commit and push |
 | **Smart Modes** | ACTIVE (block) or INACTIVE (warn) |
@@ -93,7 +93,7 @@ This will:
 │                                                             │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐     │
 │  │   Scanner   │───▶│   Detector  │───▶│  Quarantine │     │
-│  │  (ml scan)  │    │ 127 Patterns│    │  AES-256    │     │
+│  │  (ml scan)  │    │ 129 Patterns│    │  AES-256    │     │
 │  └─────────────┘    └─────────────┘    └─────────────┘     │
 │         │                                     │             │
 │         ▼                                     ▼             │
@@ -212,7 +212,7 @@ git commit -m "Clean commit"
 | **Date** | January 3, 2026 |
 | **Duration** | 2 hours |
 | **Test Files** | 55 fake secrets |
-| **Patterns Tested** | 127 |
+| **Patterns Tested** | 129 |
 
 ### Results Summary
 
@@ -283,7 +283,7 @@ ml doctor --json           # JSON output for automation
 ✓ MemoryLink v2.1.0 installed
 ✓ .memorylink/ structure valid
 ✓ Git hooks configured
-✓ 127 secret patterns loaded
+✓ 129 secret patterns loaded
 ✓ Zero network calls (100% local)
 ```
 
@@ -373,7 +373,7 @@ ml ci --provider github    # Creates workflow file automatically
 
 ---
 
-## 🎨 Secret Patterns (127 Total)
+## 🎨 Secret Patterns (129 Total)
 
 ### By Category
 
@@ -571,7 +571,7 @@ MIT License - Free to use, modify, and distribute.
 - **`ml doctor --full`** - Full benchmarks including pattern validation
 - **`ml scan --json`** - JSON output for CI/automation pipelines
 
-#### New Patterns (16 added → 127 total)
+#### New Patterns (17 added → 129 total)
 - **Database**: Supabase, PlanetScale, Turso, Neon, Upstash
 - **AI Services**: Groq, Perplexity, Replicate, Together AI
 - **Auth**: Clerk
@@ -611,38 +611,41 @@ ml scan --json
 
 ---
 
-## 🔮 Roadmap: v2.1 and Beyond
+## 🔮 Roadmap
 
-### v2.1 (Planned)
+### ✅ v2.1.0 (RELEASED - January 3, 2026)
 
 #### Security Hardening
 | Feature | Description | Status |
 |---------|-------------|--------|
-| Key Permissions Check | Verify 600 permissions on Unix, ACLs on Windows | 🔜 Planned |
-| Symlink Protection | Skip symlinks to prevent traversal attacks | 🔜 Planned |
-| ReDoS Audit | Verify all 112 patterns are safe from backtracking | 🔜 Planned |
+| Key Permissions Check | Verify 600 permissions on Unix | ✅ Done |
+| Symlink Protection | Skip symlinks to prevent traversal attacks | ✅ Done |
 
 #### New Commands
 | Command | Description | Status |
 |---------|-------------|--------|
-| `ml doctor --full` | Network connectivity + performance check | 🔜 Planned |
-| `ml scan --json` | JSON output for CI/automation pipelines | 🔜 Planned |
-| `ml explain <pattern>` | Show documentation for specific pattern | 🔜 Planned |
-| `ml perf --report` | Performance metrics (cache hit rate, timing) | 🔜 Planned |
+| `ml doctor` | Health check with diagnostics | ✅ Done |
+| `ml doctor --full` | Full benchmarks + pattern validation | ✅ Done |
+| `ml scan --json` | JSON output for CI/automation pipelines | ✅ Done |
 
-#### New Patterns (8 additional)
-| Pattern | Use Case |
-|---------|----------|
-| Google Maps API Key | Maps/Places API protection |
-| Slack Webhooks | Prevent webhook URL leaks |
-| Firebase Service Account | JSON key detection |
-| Supabase Keys | Backend-as-a-Service |
-| Vercel Tokens | Deployment platform |
-| Netlify Tokens | JAMstack deployments |
-| Railway Tokens | Cloud platform |
-| Kubernetes Secrets | Base64-encoded secrets |
+#### New Patterns (17 new → 129 total)
+| Pattern | Status |
+|---------|--------|
+| Supabase, PlanetScale, Turso, Neon, Upstash | ✅ Done |
+| Groq, Perplexity, Replicate, Together AI | ✅ Done |
+| Clerk, Resend | ✅ Done |
+| PhonePe, Cashfree, Instamojo (expanded) | ✅ Done |
 
-### v3.0 (Future)
+### 🔜 v2.2 (Planned)
+
+| Feature | Description |
+|---------|-------------|
+| `ml explain <pattern>` | Show documentation for specific pattern |
+| `ml perf --report` | Performance metrics (cache hit rate, timing) |
+| ReDoS Audit | Verify all patterns are safe from backtracking |
+| More patterns | Railway, Kubernetes, Firebase Service Account |
+
+### 🔮 v3.0 (Future)
 
 | Feature | Description |
 |---------|-------------|

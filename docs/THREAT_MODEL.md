@@ -1,7 +1,7 @@
 # 🔐 MemoryLink Threat Model
 
-**Version:** 2.0.2  
-**Last Updated:** January 2, 2026  
+**Version:** 2.1.0  
+**Last Updated:** January 3, 2026  
 **Status:** Production
 
 This document describes the security boundaries, threat model, and trust assumptions for MemoryLink.

@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Symlink Protection**: Scanner now skips symbolic links to prevent traversal attacks
 - **Key Permissions**: Enhanced `ml self-check` verifies 600 permissions on encryption keys
 
-#### New Secret Patterns (16 new → 128 total)
+#### New Secret Patterns (17 new → 129 total)
 - **Database Services**: Supabase, PlanetScale, Turso, Neon, Upstash
 - **AI Services**: Replicate, Together AI, Groq, Perplexity
 - **Auth Services**: Clerk
@@ -33,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **India Payments**: PhonePe, Cashfree, Instamojo (expanded)
 
 ### Changed
-- Pattern count increased from 112 to 128
+- Pattern count increased from 112 to 129
 - Improved performance benchmarking in doctor command
 - Better error messages with JSON output support
 

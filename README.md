@@ -17,7 +17,7 @@ MemoryLink scans your code for secrets (API keys, passwords, tokens) and **block
 
 | Protection | What It Does | When |
 |------------|--------------|------|
-| 🔍 **Scan** | Detects 112 secret patterns (API keys, passwords, PII) | On demand |
+| 🔍 **Scan** | Detects 129 secret patterns (API keys, passwords, PII) | On demand |
 | 🪝 **Git Hooks** | Warns before you commit/push secrets | Every commit |
 | 🚫 **CI/CD Block** | Blocks PRs with secrets (19 CI platforms) | Every PR |
 | 🔐 **Quarantine** | Encrypts detected secrets (AES-256-GCM) | Automatic |
@@ -137,6 +137,15 @@ From now on, every `git commit` and `git push` is automatically scanned.
 ```bash
 ml scan                    # Scan entire project
 ml scan --path src/        # Scan specific directory
+ml scan --json             # JSON output for CI/automation (v2.1)
+```
+
+### `ml doctor` - Health Check (v2.1)
+
+```bash
+ml doctor                  # Basic health checks
+ml doctor --full           # Full diagnostics + benchmarks
+ml doctor --json           # JSON output for automation
 ```
 
 ### `ml mode` - Switch Protection Level
@@ -201,15 +210,16 @@ git push --no-verify         # Emergency bypass (Git built-in)
 
 ---
 
-## 🎨 112 Secret Patterns
+## 🎨 129 Secret Patterns
 
 | Category | Examples |
 |----------|----------|
 | **Cloud** | AWS, Azure, GCP, DigitalOcean, Heroku |
-| **AI/ML** | OpenAI, Claude/Anthropic, HuggingFace, Cohere |
-| **Payment** | Stripe, PayPal, Square, Razorpay |
-| **Auth** | GitHub, GitLab, Slack, Discord, JWT, OAuth |
-| **India** | Aadhaar, PAN, GSTIN, UPI, IFSC, Paytm |
+| **AI/ML** | OpenAI, Claude/Anthropic, HuggingFace, Groq, Perplexity, Replicate |
+| **Payment** | Stripe, PayPal, Square, Razorpay, PhonePe, Cashfree |
+| **Auth** | GitHub, GitLab, Slack, Discord, JWT, OAuth, Clerk |
+| **Database** | Supabase, PlanetScale, Turso, Neon, Upstash |
+| **India** | Aadhaar, PAN, GSTIN, UPI, IFSC, Paytm, PhonePe, Instamojo |
 | **Personal** | SSN, Credit Card, Phone, Email |
 | **Browser** | localStorage, sessionStorage, cookies |
 
@@ -329,7 +339,7 @@ Add to `.memorylink/config.json`:
 - [Quick Reference](docs/QUICK_REFERENCE.md) - Cheat sheet
 - [FAQ](docs/FAQ.md) - Common questions
 - [Troubleshooting](docs/TROUBLESHOOTING.md) - Problem solutions
-- [Patterns](docs/PATTERNS.md) - All 112 patterns
+- [Patterns](docs/PATTERNS.md) - All 129 patterns
 - [Comparisons](docs/COMPARISONS.md) - vs other tools
 - [Threat Model](docs/THREAT_MODEL.md) - Security boundaries & design
 - [Remediation Guide](docs/REMEDIATION.md) - How to rotate leaked secrets
