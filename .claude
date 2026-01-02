@@ -1,0 +1,77 @@
+# .claude - MemoryLink Project Rules
+# Project-specific rules for Claude Code
+# Version: 1.0
+# Date: December 29, 2025
+
+# ============================================================================
+# PRIMARY SOURCE
+# ============================================================================
+# SPEC.md is the normative specification
+# Follow it exactly - it is law
+# PRD is non-normative (background only)
+
+# ============================================================================
+# DEVELOPMENT APPROACH
+# ============================================================================
+# Test-Driven Development (TDD):
+# 1. Write tests first
+# 2. Run tests (should fail)
+# 3. Implement feature
+# 4. Run tests (should pass)
+# 5. Refactor if needed
+
+# ============================================================================
+# CODE STANDARDS
+# ============================================================================
+- TypeScript strict mode
+- No features not in SPEC.md
+- Commands: capture, query, promote, audit, gate
+- No ml resolve (not in v4.3.10)
+
+# ============================================================================
+# SECURITY RULES
+# ============================================================================
+# Gate output MUST NOT print:
+# - Quarantined content
+# - Raw secrets
+# - Only: IDs, refs, metadata
+
+# ============================================================================
+# ARCHITECTURE RULES
+# ============================================================================
+# Evidence Levels:
+# - E0: Raw (just captured)
+# - E1: Curated (reviewed)
+# - E2: Verified (ONLY via promote)
+# - Capture CANNOT create E2
+
+# Conflict Resolution:
+# - Only ACTIVE records eligible
+# - QUARANTINED never returned
+# - DEPRECATED excluded from truth
+
+# Quarantine Storage:
+# - Global: .memorylink/quarantined/
+# - Not per-scope
+# - Gitignored
+
+# Gate Evaluation:
+# - Reads: MemoryRecord files
+# - Checks: record.status
+# - Ignores: .original file presence
+
+# ============================================================================
+# TESTING
+# ============================================================================
+- 100% coverage goal for core
+- Unit tests for all functions
+- Integration tests for commands
+- Use Vitest
+
+# ============================================================================
+# GIT
+# ============================================================================
+- Small, focused commits
+- Meaningful commit messages
+- Test before commit
+

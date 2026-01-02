@@ -1,0 +1,72 @@
+# MemoryLink .gitignore
+
+# API Keys and Secrets
+*.key
+*.pem
+.env
+.env.local
+.env.*.local
+**/secrets/
+**/api_keys/
+
+# Setup scripts with hardcoded API keys (should use .env instead)
+authenticate-claude.sh
+setup-claude-auth.sh
+CLAUDE_AUTH_SETUP.md
+MANUAL_AUTH_STEPS.md
+
+# Claude Code config (may contain sensitive data)
+.config/claude-code/
+~/.config/claude-code/
+
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+
+# MemoryLink specific - ENTIRE folder should be ignored
+.memorylink/
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# TypeScript
+*.tsbuildinfo
+
+
+# MemoryLink - Auto-ignored directories
+# Week 6: Plan file governance
+
+# Cursor plans (may contain secrets)
+.cursor/plans/
+.cursor/tmp/
+
+# Agent scratch space
+.agent/scratch/

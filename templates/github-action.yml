@@ -1,0 +1,104 @@
+# MemoryLink GitHub Action
+# 
+# This action scans your code for secrets BEFORE they reach your repository.
+# Add this to .github/workflows/memorylink.yml in your project.
+#
+# Usage:
+#   1. Copy this file to your project: .github/workflows/memorylink.yml
+#   2. Commit and push
+#   3. MemoryLink will scan on every push and PR
+#
+# Features:
+#   - Scans all changed files for secrets
+#   - Blocks PRs with secrets
+#   - Provides human-readable output
+#   - Supports 69+ secret patterns
+
+name: MemoryLink Security Scan
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  security-scan:
+    name: 🔒 Secret Detection
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for diff scanning
+      
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: 🔧 Install MemoryLink
+        run: npm install -g memorylink
+      
+      - name: 🔍 Scan for secrets
+        id: scan
+        run: |
+          echo "🔍 Scanning for secrets..."
+          ml scan --json > scan-results.json 2>&1 || true
+          
+          # Check if any secrets found
+          if [ -f scan-results.json ]; then
+            SECRETS_COUNT=$(cat scan-results.json | jq '.issues | length' 2>/dev/null || echo "0")
+            echo "secrets_count=$SECRETS_COUNT" >> $GITHUB_OUTPUT
+            
+            if [ "$SECRETS_COUNT" != "0" ] && [ "$SECRETS_COUNT" != "" ]; then
+              echo "❌ Found $SECRETS_COUNT potential secrets!"
+              cat scan-results.json | jq '.issues[] | "⚠️  \(.pattern) in \(.file):\(.line)"' -r 2>/dev/null || true
+              exit 1
+            fi
+          fi
+          
+          echo "✅ No secrets detected!"
+      
+      - name: 🛡️ Check changed files only (PR)
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "🔍 Scanning changed files in this PR..."
+          
+          # Get list of changed files
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          
+          # Scan each changed file
+          for file in $CHANGED_FILES; do
+            if [ -f "$file" ]; then
+              echo "  Checking: $file"
+              ml gate --diff || {
+                echo "❌ Secret found in changed files!"
+                exit 1
+              }
+            fi
+          done
+          
+          echo "✅ All changed files are clean!"
+      
+      - name: 📊 Summary
+        if: always()
+        run: |
+          echo "## 🔒 MemoryLink Security Scan Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.scan.outputs.secrets_count }}" == "0" ] || [ -z "${{ steps.scan.outputs.secrets_count }}" ]; then
+            echo "✅ **All clear!** No secrets detected in your code." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **${{ steps.scan.outputs.secrets_count }} potential secrets found!**" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Please review and remove any secrets before merging." >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### What to do:" >> $GITHUB_STEP_SUMMARY
+            echo "1. Review the detected secrets above" >> $GITHUB_STEP_SUMMARY
+            echo "2. If they're real secrets, rotate them immediately" >> $GITHUB_STEP_SUMMARY
+            echo "3. Use environment variables instead of hardcoding" >> $GITHUB_STEP_SUMMARY
+            echo "4. Push the fix and re-run this check" >> $GITHUB_STEP_SUMMARY
+          fi
+

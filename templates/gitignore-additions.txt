@@ -1,0 +1,13 @@
+# MemoryLink - Auto-ignored directories
+# Week 6: Plan file governance
+
+# Cursor plans (may contain secrets)
+.cursor/plans/
+.cursor/tmp/
+
+# Agent scratch space
+.agent/scratch/
+
+# MemoryLink internal
+.memorylink/quarantined/
+

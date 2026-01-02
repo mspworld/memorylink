@@ -1,0 +1,44 @@
+#!/bin/sh
+# MemoryLink Pre-push Hook
+# Week 8: Git hooks integration
+# 
+# This hook runs ml gate to check entire repository
+# Blocks push if secrets are detected
+
+# Get the MemoryLink command (assumes it's in PATH or node_modules/.bin)
+ML_CMD="ml"
+
+# Check if ml command exists
+if ! command -v "$ML_CMD" >/dev/null 2>&1; then
+  # Try node_modules/.bin/ml
+  if [ -f "node_modules/.bin/ml" ]; then
+    ML_CMD="node_modules/.bin/ml"
+  else
+    echo "⚠️  MemoryLink not found. Install with: npm install -g @memorylink/cli"
+    echo "   Or run: npm install"
+    exit 0  # Don't block push if MemoryLink not installed
+  fi
+fi
+
+# Run ml gate (checks entire repository)
+"$ML_CMD" gate
+
+# Check exit code
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -eq 0 ]; then
+  # Success - no secrets detected
+  exit 0
+elif [ $EXIT_CODE -eq 1 ]; then
+  # Secrets detected - block push
+  echo ""
+  echo "❌ Push blocked: Secrets detected in repository"
+  echo "   Fix the issues above or use: git push --no-verify (not recommended)"
+  exit 1
+else
+  # Error (exit code 2) - don't block push, but warn
+  echo "⚠️  MemoryLink gate check failed (error code: $EXIT_CODE)"
+  echo "   Proceeding with push, but please verify manually"
+  exit 0
+fi
+

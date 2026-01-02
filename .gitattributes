@@ -1,0 +1,31 @@
+# MemoryLink - Prevent sensitive files in releases
+# These files will NOT be included in "git archive" or "Download ZIP"
+
+# Never include in git archive (GitHub "Download ZIP")
+.memorylink/ export-ignore
+.env export-ignore
+.env.* export-ignore
+*.log export-ignore
+
+# Test files (not needed for users)
+tests/ export-ignore
+test/ export-ignore
+*.test.ts export-ignore
+*.spec.ts export-ignore
+
+# Development files
+.vscode/ export-ignore
+.cursor/ export-ignore
+.github/ export-ignore
+.idea/ export-ignore
+
+# Development docs
+DEVELOPMENT.md export-ignore
+TODO.md export-ignore
+LAUNCH_README.md export-ignore
+
+# Config files users don't need
+vitest.config.ts export-ignore
+tsconfig.json export-ignore
+.gitattributes export-ignore
+
