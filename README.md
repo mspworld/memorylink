@@ -157,17 +157,18 @@ ml gate --rule block-quarantined --history    # Check git history
 
 ---
 
-## 🔒 7-Layer Protection
+## 🔒 6-Layer Protection
 
 ```
 Layer 1: On-demand scan      → ml scan catches secrets immediately
 Layer 2: Pre-commit hook     → Blocks before commit (staged files)
 Layer 3: Pre-push hook       → Blocks before push (full scan)
-Layer 4: Git history scan    → ml gate --history finds old leaks
+Layer 4: CI/CD gate          → Auto-enforces when running in CI
 Layer 5: Quarantine          → AES-256-GCM encrypted isolation
-Layer 6: CI/CD gate          → Auto-enforces when runs in CI
-Layer 7: Audit trail         → Tracks everything
+Layer 6: Audit trail         → Tracks everything with timestamps
 ```
+
+> 💡 **Bonus:** `ml gate --history` scans Git history for old leaks!
 
 ---
 
@@ -324,11 +325,14 @@ Add to `.memorylink/config.json`:
 
 ## 📚 Documentation
 
+- [Product Guide](PRODUCT_GUIDE.md) - **Complete guide with testing & results**
 - [Quick Reference](docs/QUICK_REFERENCE.md) - Cheat sheet
 - [FAQ](docs/FAQ.md) - Common questions
 - [Troubleshooting](docs/TROUBLESHOOTING.md) - Problem solutions
 - [Patterns](docs/PATTERNS.md) - All 112 patterns
 - [Comparisons](docs/COMPARISONS.md) - vs other tools
+- [Threat Model](docs/THREAT_MODEL.md) - Security boundaries & design
+- [Remediation Guide](docs/REMEDIATION.md) - How to rotate leaked secrets
 
 ---
 
@@ -348,6 +352,24 @@ MIT License - see [LICENSE](LICENSE)
 
 - **Issues:** [GitHub Issues](https://github.com/mspworld/memorylink/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/mspworld/memorylink/discussions)
+
+---
+
+---
+
+## ❓ FAQ
+
+**Q: Why no MCP integration yet?**
+> MCP (Model Context Protocol) support is planned for v3.0. We're ensuring the core secret detection is bulletproof first.
+
+**Q: Does MemoryLink follow security standards?**
+> Yes! MemoryLink follows security best practices aligned with [OWASP guidelines](https://owasp.org/). Full OWASP ASI06 compliance documentation is planned for v3.0.
+
+**Q: Is it safe to use in enterprise environments?**
+> Absolutely. 100% local operation, zero telemetry, AES-256-GCM encryption, and project-isolated keys make it enterprise-ready.
+
+**Q: What makes MemoryLink different from gitleaks?**
+> Better UX (color-coded output), India-specific patterns (Aadhaar, PAN, UPI), zero-config setup, and smart mode switching.
 
 ---
 
