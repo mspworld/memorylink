@@ -5,6 +5,14 @@ All notable changes to MemoryLink will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.1] - 2026-01-03
+
+### Fixed
+- **False Positive Fix**: Vercel and Netlify token patterns were too generic, causing false positives on normal code
+- **Documentation**: Corrected pattern count from 129 to 127 across all docs
+
+---
+
 ## [2.1.0] - 2026-01-02
 
 ### Added
@@ -25,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Symlink Protection**: Scanner now skips symbolic links to prevent traversal attacks
 - **Key Permissions**: Enhanced `ml self-check` verifies 600 permissions on encryption keys
 
-#### New Secret Patterns (17 new → 129 total)
+#### New Secret Patterns (15 new → 127 total)
 - **Database Services**: Supabase, PlanetScale, Turso, Neon, Upstash
 - **AI Services**: Replicate, Together AI, Groq, Perplexity
 - **Auth Services**: Clerk
@@ -33,7 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **India Payments**: PhonePe, Cashfree, Instamojo (expanded)
 
 ### Changed
-- Pattern count increased from 112 to 129
+- Pattern count increased from 112 to 127
 - Improved performance benchmarking in doctor command
 - Better error messages with JSON output support
 

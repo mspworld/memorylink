@@ -1,7 +1,7 @@
 {
   "name": "memorylink",
-  "version": "2.1.0",
-  "description": "MemoryLink - Prevent secret leaks in AI-assisted development. 129 patterns including India-specific (Aadhaar, PAN, UPI).",
+  "version": "2.1.1",
+  "description": "MemoryLink - Prevent secret leaks in AI-assisted development. 127 patterns including India-specific (Aadhaar, PAN, UPI).",
   "type": "module",
   "main": "dist/index.js",
   "bin": {

@@ -17,7 +17,7 @@ MemoryLink scans your code for secrets (API keys, passwords, tokens) and **block
 
 | Protection | What It Does | When |
 |------------|--------------|------|
-| 🔍 **Scan** | Detects 129 secret patterns (API keys, passwords, PII) | On demand |
+| 🔍 **Scan** | Detects 127 secret patterns (API keys, passwords, PII) | On demand |
 | 🪝 **Git Hooks** | Warns before you commit/push secrets | Every commit |
 | 🚫 **CI/CD Block** | Blocks PRs with secrets (19 CI platforms) | Every PR |
 | 🔐 **Quarantine** | Encrypts detected secrets (AES-256-GCM) | Automatic |
@@ -210,7 +210,7 @@ git push --no-verify         # Emergency bypass (Git built-in)
 
 ---
 
-## 🎨 129 Secret Patterns
+## 🎨 127 Secret Patterns
 
 | Category | Examples |
 |----------|----------|
@@ -339,7 +339,7 @@ Add to `.memorylink/config.json`:
 - [Quick Reference](docs/QUICK_REFERENCE.md) - Cheat sheet
 - [FAQ](docs/FAQ.md) - Common questions
 - [Troubleshooting](docs/TROUBLESHOOTING.md) - Problem solutions
-- [Patterns](docs/PATTERNS.md) - All 129 patterns
+- [Patterns](docs/PATTERNS.md) - All 127 patterns
 - [Comparisons](docs/COMPARISONS.md) - vs other tools
 - [Threat Model](docs/THREAT_MODEL.md) - Security boundaries & design
 - [Remediation Guide](docs/REMEDIATION.md) - How to rotate leaked secrets

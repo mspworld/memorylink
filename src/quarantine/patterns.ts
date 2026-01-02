@@ -634,13 +634,13 @@ export const SECRET_PATTERNS: SecretPattern[] = [
   {
     id: 'vercel-token',
     name: 'Vercel Token',
-    pattern: /[a-zA-Z0-9]{24}/i,
+    pattern: /(?:vercel[_-]?(?:token|api[_-]?key)|VERCEL_TOKEN)\s*[:=]\s*[a-zA-Z0-9]{24}/i,
     description: 'Vercel deployment token',
   },
   {
     id: 'netlify-token',
     name: 'Netlify Token',
-    pattern: /[a-zA-Z0-9_-]{40,}/i,
+    pattern: /(?:netlify[_-]?(?:token|auth[_-]?token)|NETLIFY_AUTH_TOKEN)\s*[:=]\s*[a-zA-Z0-9_-]{40,}/i,
     description: 'Netlify personal access token',
   },
   {

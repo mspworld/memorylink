@@ -33,7 +33,7 @@ You Code → Git Commit → MemoryLink Scans → ⚠️ Warning or 🚫 Block
 
 | Feature | Description |
 |---------|-------------|
-| **129 Secret Patterns** | AWS, OpenAI, Stripe, Google, Supabase, and 120+ more |
+| **127 Secret Patterns** | AWS, OpenAI, Stripe, Google, Supabase, and 120+ more |
 | **India-Specific** | Aadhaar, PAN, GSTIN, UPI, IFSC, Razorpay, Paytm, PhonePe, Cashfree |
 | **Git Hooks** | Auto-scans on every commit and push |
 | **Smart Modes** | ACTIVE (block) or INACTIVE (warn) |
@@ -93,7 +93,7 @@ This will:
 │                                                             │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐     │
 │  │   Scanner   │───▶│   Detector  │───▶│  Quarantine │     │
-│  │  (ml scan)  │    │ 129 Patterns│    │  AES-256    │     │
+│  │  (ml scan)  │    │ 127 Patterns│    │  AES-256    │     │
 │  └─────────────┘    └─────────────┘    └─────────────┘     │
 │         │                                     │             │
 │         ▼                                     ▼             │
@@ -212,7 +212,7 @@ git commit -m "Clean commit"
 | **Date** | January 3, 2026 |
 | **Duration** | 2 hours |
 | **Test Files** | 55 fake secrets |
-| **Patterns Tested** | 129 |
+| **Patterns Tested** | 127 |
 
 ### Results Summary
 
@@ -373,7 +373,7 @@ ml ci --provider github    # Creates workflow file automatically
 
 ---
 
-## 🎨 Secret Patterns (129 Total)
+## 🎨 Secret Patterns (127 Total)
 
 ### By Category
 
@@ -571,7 +571,7 @@ MIT License - Free to use, modify, and distribute.
 - **`ml doctor --full`** - Full benchmarks including pattern validation
 - **`ml scan --json`** - JSON output for CI/automation pipelines
 
-#### New Patterns (17 added → 129 total)
+#### New Patterns (15 added → 127 total)
 - **Database**: Supabase, PlanetScale, Turso, Neon, Upstash
 - **AI Services**: Groq, Perplexity, Replicate, Together AI
 - **Auth**: Clerk
