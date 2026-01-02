@@ -21,7 +21,7 @@ if ! command -v "$ML_CMD" >/dev/null 2>&1; then
 fi
 
 # Run ml gate (checks entire repository)
-"$ML_CMD" gate
+"$ML_CMD" gate --rule block-quarantined
 
 # Check exit code
 EXIT_CODE=$?

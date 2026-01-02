@@ -9,10 +9,15 @@
 
 import { readFile, writeFile, chmod, mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
-import { resolve, join } from 'path';
+import { resolve, join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import type { Result } from '../core/types.js';
 import { Ok, Err } from '../core/types.js';
 import { StorageError } from '../core/errors.js';
+
+// ES module compatibility - polyfill __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /**
  * Install git hooks

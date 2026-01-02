@@ -1,6 +1,6 @@
 {
   "name": "memorylink",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "MemoryLink - Prevent secret leaks in AI-assisted development",
   "type": "module",
   "main": "dist/index.js",

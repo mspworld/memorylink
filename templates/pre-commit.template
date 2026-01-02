@@ -21,7 +21,7 @@ if ! command -v "$ML_CMD" >/dev/null 2>&1; then
 fi
 
 # Run ml gate --diff (checks only changed files)
-"$ML_CMD" gate --diff
+"$ML_CMD" gate --diff --rule block-quarantined
 
 # Check exit code
 EXIT_CODE=$?
