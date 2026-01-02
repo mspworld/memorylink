@@ -7,6 +7,14 @@
   "bin": {
     "ml": "./dist/cli/index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mspworld/memorylink.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mspworld/memorylink/issues"
+  },
+  "homepage": "https://github.com/mspworld/memorylink#readme",
   "files": [
     "dist/",
     "templates/",
@@ -31,13 +39,18 @@
     "postinstall": "echo '\\n🚀 MemoryLink installed! Run \"ml init\" in your project to enable protection.\\n'"
   },
   "keywords": [
-    "memory",
-    "ai",
-    "governance",
+    "secrets",
+    "security",
+    "api-keys",
+    "pre-commit",
+    "git-hooks",
     "cli",
-    "security"
+    "ai",
+    "devtools",
+    "cicd",
+    "scanning"
   ],
-  "author": "",
+  "author": "mspworld",
   "license": "MIT",
   "dependencies": {
     "commander": "^11.1.0",

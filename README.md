@@ -346,8 +346,8 @@ MIT License - see [LICENSE](LICENSE)
 
 ## 🙏 Support
 
-- **Issues:** [GitHub Issues](https://github.com/your-org/memorylink/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/your-org/memorylink/discussions)
+- **Issues:** [GitHub Issues](https://github.com/mspworld/memorylink/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/mspworld/memorylink/discussions)
 
 ---
 

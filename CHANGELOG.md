@@ -5,6 +5,60 @@ All notable changes to MemoryLink will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-01-02
+
+### Added
+
+#### Enhanced Secret Detection
+- **112 Secret Patterns**: Expanded from 20+ to 112 detection patterns
+- **India-specific Patterns**: Aadhaar, PAN, GSTIN, UPI, IFSC, Paytm, PhonePe
+- **Browser Storage**: localStorage, sessionStorage, cookie detection
+- **Cloud Providers**: AWS, Azure, GCP, DigitalOcean, Heroku, and more
+- **AI/ML Keys**: OpenAI, Anthropic, HuggingFace, Cohere patterns
+
+#### Smart Mode System
+- **ACTIVE Mode**: Blocks commits/pushes when secrets detected
+- **INACTIVE Mode** (default): Warns but allows commits
+- **Smart Resolution**: CLI flag > ENV var > CI detection > config > default
+- **CI Auto-Enforce**: 19 CI platforms automatically enforce ACTIVE mode
+- **One-time Override**: `ML_MODE=active git push` for temporary enforcement
+
+#### Git Hooks Integration
+- **Pre-commit Hook**: Scans only staged files (fast)
+- **Pre-push Hook**: Full repository scan before push
+- **Easy Install**: `ml hooks --install` command
+- **Smart Bypass**: `git commit --no-verify` for emergencies
+
+#### New Commands
+- `ml scan` - Comprehensive secret scanning with beautiful output
+- `ml mode` - View and switch between ACTIVE/INACTIVE modes
+- `ml self-check` - Verify installation and configuration
+- `ml ci` - Setup CI/CD integration (GitHub Actions workflow)
+- `ml hooks` - Manage Git hooks installation
+
+#### CI/CD Support
+- **19 CI Platforms**: GitHub Actions, GitLab CI, Jenkins, CircleCI, Travis, Buildkite, Azure Pipelines, TeamCity, Bitbucket, Drone, AppVeyor, Semaphore, Buddy, Vercel, Netlify, Bitrise, Codeship, and more
+- **Auto-Detection**: Automatically enables ACTIVE mode in CI environments
+- **Exit Codes**: 0=pass, 1=blocked, 2=error for pipeline integration
+
+#### Enhanced User Experience
+- **Color-Coded Output**: Beautiful terminal output with emoji indicators
+- **Secret Masking**: All output shows `AKIA****MPLE` format
+- **Actionable Hints**: Shows exact commands to fix issues
+- **Progress Indicators**: Real-time feedback during scans
+
+### Changed
+- **Mode Default**: Changed default from blocking to warn-only (INACTIVE)
+- **Scan Performance**: Optimized scanning for large repositories
+- **Documentation**: Complete rewrite of README and docs
+
+### Security
+- **AES-256-GCM Encryption**: For quarantined secrets
+- **Zero Telemetry**: 100% local, no network calls ever
+- **Key Isolation**: Encryption keys stored in `~/.memorylink/keys/` (not in project)
+
+---
+
 ## [1.0.0] - 2025-12-30
 
 ### Added
@@ -94,5 +148,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[1.0.0]: https://github.com/your-org/memorylink/releases/tag/v1.0.0
+[2.0.0]: https://github.com/mspworld/memorylink/releases/tag/v2.0.0
+[1.0.0]: https://github.com/mspworld/memorylink/releases/tag/v1.0.0
 
