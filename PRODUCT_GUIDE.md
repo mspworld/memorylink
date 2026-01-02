@@ -1,7 +1,7 @@
 # 🔒 MemoryLink - Complete Product Guide
 
-**Version:** 2.0.2  
-**Release Date:** January 2, 2026  
+**Version:** 2.1.0  
+**Release Date:** January 3, 2026  
 **Author:** mspworld  
 **License:** MIT
 
@@ -15,6 +15,7 @@
 | **GitHub Repository** | https://github.com/mspworld/memorylink |
 | **Issues & Support** | https://github.com/mspworld/memorylink/issues |
 | **Discussions** | https://github.com/mspworld/memorylink/discussions |
+| **Changelog** | https://github.com/mspworld/memorylink/blob/main/CHANGELOG.md |
 
 ---
 
@@ -32,13 +33,16 @@ You Code → Git Commit → MemoryLink Scans → ⚠️ Warning or 🚫 Block
 
 | Feature | Description |
 |---------|-------------|
-| **112 Secret Patterns** | AWS, OpenAI, Stripe, Google, and 100+ more |
-| **India-Specific** | Aadhaar, PAN, GSTIN, UPI, IFSC detection (Unique!) |
+| **127 Secret Patterns** | AWS, OpenAI, Stripe, Google, Supabase, and 120+ more |
+| **India-Specific** | Aadhaar, PAN, GSTIN, UPI, IFSC, Razorpay, Paytm, PhonePe, Cashfree |
 | **Git Hooks** | Auto-scans on every commit and push |
 | **Smart Modes** | ACTIVE (block) or INACTIVE (warn) |
 | **19 CI Platforms** | GitHub Actions, GitLab CI, Jenkins, and more |
 | **Beautiful Output** | Color-coded, emoji-rich, easy to read |
 | **Zero Telemetry** | 100% local, your secrets never leave your machine |
+| **JSON Output** | `ml scan --json` for CI/automation pipelines |
+| **Health Check** | `ml doctor --full` for diagnostics |
+| **Symlink Protection** | Prevents traversal attacks |
 
 ---
 
@@ -60,7 +64,7 @@ npm install -g memorylink
 
 ```bash
 ml --version
-# Output: 2.0.2
+# Output: 2.1.0
 ```
 
 ### Initialize in Your Project
@@ -84,12 +88,12 @@ This will:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     MemoryLink v2.0.2                       │
+│                     MemoryLink v2.1.0                       │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐     │
 │  │   Scanner   │───▶│   Detector  │───▶│  Quarantine │     │
-│  │  (ml scan)  │    │ 112 Patterns│    │  AES-256    │     │
+│  │  (ml scan)  │    │ 127 Patterns│    │  AES-256    │     │
 │  └─────────────┘    └─────────────┘    └─────────────┘     │
 │         │                                     │             │
 │         ▼                                     ▼             │
@@ -205,10 +209,10 @@ git commit -m "Clean commit"
 | Parameter | Value |
 |-----------|-------|
 | **Tester** | Antigravity AI |
-| **Date** | January 2, 2026 |
+| **Date** | January 3, 2026 |
 | **Duration** | 2 hours |
 | **Test Files** | 55 fake secrets |
-| **Patterns Tested** | 112 |
+| **Patterns Tested** | 127 |
 
 ### Results Summary
 
@@ -263,7 +267,24 @@ Sets up MemoryLink in your project:
 ```bash
 ml scan                    # Scan entire project
 ml scan --path src/        # Scan specific directory
-ml scan --verbose          # Detailed output
+ml scan --json             # v2.1: JSON output for CI/automation
+```
+
+### `ml doctor` - Health Check (v2.1)
+
+```bash
+ml doctor                  # Basic health checks
+ml doctor --full           # Full diagnostics + benchmarks
+ml doctor --json           # JSON output for automation
+```
+
+**Sample Output:**
+```
+✓ MemoryLink v2.1.0 installed
+✓ .memorylink/ structure valid
+✓ Git hooks configured
+✓ 127 secret patterns loaded
+✓ Zero network calls (100% local)
 ```
 
 ### `ml mode` - View/Set Mode
@@ -352,22 +373,22 @@ ml ci --provider github    # Creates workflow file automatically
 
 ---
 
-## 🎨 Secret Patterns (112 Total)
+## 🎨 Secret Patterns (127 Total)
 
 ### By Category
 
 | Category | Patterns | Examples |
 |----------|----------|----------|
 | **Cloud** | 15 | AWS, Azure, GCP, DigitalOcean |
-| **AI/ML** | 8 | OpenAI, Anthropic, HuggingFace |
-| **Payment** | 10 | Stripe, PayPal, Square, Razorpay |
-| **Auth** | 12 | GitHub, Slack, Discord, JWT |
-| **Database** | 8 | PostgreSQL, MySQL, MongoDB, Redis |
-| **Email/SMS** | 6 | SendGrid, Mailgun, Twilio |
+| **AI/ML** | 12 | OpenAI, Anthropic, HuggingFace, Groq, Perplexity, Replicate |
+| **Payment** | 14 | Stripe, PayPal, Square, Razorpay, Paytm, PhonePe, Cashfree |
+| **Auth** | 14 | GitHub, Slack, Discord, JWT, Clerk |
+| **Database** | 12 | PostgreSQL, MySQL, MongoDB, Redis, Supabase, PlanetScale, Neon, Turso |
+| **Email/SMS** | 7 | SendGrid, Mailgun, Twilio, Resend |
 | **Social** | 8 | Twitter, Facebook, LinkedIn |
-| **India 🇮🇳** | 10 | Aadhaar, PAN, GSTIN, UPI, IFSC |
-| **Browser** | 5 | localStorage, cookies |
-| **Generic** | 30 | Passwords, API keys, tokens |
+| **India 🇮🇳** | 13 | Aadhaar, PAN, GSTIN, UPI, IFSC, Razorpay, Paytm, PhonePe, Cashfree, Instamojo |
+| **Browser** | 6 | localStorage, cookies, URL params |
+| **Generic** | 26 | Passwords, API keys, tokens |
 
 ### India-Specific Patterns (Unique!)
 
@@ -378,8 +399,27 @@ ml ci --provider github    # Creates workflow file automatically
 | GSTIN | 22AAAAA0000A1Z5 | ✅ |
 | UPI ID | user@upi | ✅ |
 | IFSC Code | SBIN0001234 | ✅ |
-| Paytm Key | paytm_key_xxx | ✅ |
-| PhonePe | phonepe_xxx | ✅ |
+| Razorpay Key | rzp_live_xxx | ✅ |
+| Paytm Key | paytm_merchant_xxx | ✅ |
+| PhonePe Key | phonepe_xxx | ✅ |
+| Cashfree Key | cashfree_xxx | ✅ |
+| Instamojo Key | instamojo_xxx | ✅ |
+
+### New in v2.1.0
+
+| Pattern | Description |
+|---------|-------------|
+| **Supabase** | API keys and database URLs |
+| **PlanetScale** | Database tokens |
+| **Turso** | Database connections |
+| **Neon** | Serverless Postgres |
+| **Upstash** | Redis tokens |
+| **Clerk** | Auth API keys |
+| **Resend** | Email API keys |
+| **Groq** | AI inference keys |
+| **Perplexity** | AI API keys |
+| **Replicate** | AI model tokens |
+| **Together AI** | AI API keys |
 
 ---
 
@@ -518,10 +558,29 @@ MIT License - Free to use, modify, and distribute.
 
 | Version | Date | Changes |
 |---------|------|---------|
+| **2.1.0** | **2026-01-03** | **`ml doctor` command, `ml scan --json`, 127 patterns, symlink protection** |
 | 2.0.2 | 2026-01-02 | Fixed `__dirname` polyfill, hook templates |
 | 2.0.1 | 2026-01-02 | npm publish fix |
 | 2.0.0 | 2026-01-02 | Major release: 112 patterns, smart modes |
 | 1.0.0 | 2025-12-30 | Initial release |
+
+### What's New in v2.1.0
+
+#### New Commands
+- **`ml doctor`** - Health check with performance diagnostics
+- **`ml doctor --full`** - Full benchmarks including pattern validation
+- **`ml scan --json`** - JSON output for CI/automation pipelines
+
+#### New Patterns (16 added → 127 total)
+- **Database**: Supabase, PlanetScale, Turso, Neon, Upstash
+- **AI Services**: Groq, Perplexity, Replicate, Together AI
+- **Auth**: Clerk
+- **Email**: Resend
+- **India Payments**: PhonePe, Cashfree, Instamojo (expanded)
+
+#### Security Hardening
+- **Symlink Protection**: Scanner skips symlinks to prevent traversal attacks
+- **Enhanced Key Checks**: `ml self-check` verifies 600 permissions
 
 ---
 
@@ -540,6 +599,12 @@ ml init
 
 # 4. (Optional) Enable blocking mode
 ml mode active
+
+# 5. (v2.1) Run health check
+ml doctor --full
+
+# 6. (v2.1) JSON output for CI
+ml scan --json
 ```
 
 ---
