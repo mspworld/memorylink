@@ -4,12 +4,24 @@
  * Scans entire project and shows human-readable results
  */
 
-import { readFile, readdir, stat } from 'fs/promises';
+import { readFile, readdir, stat, lstat } from 'fs/promises';
 import { join, relative, resolve } from 'path';
 import { detectSecrets } from '../../quarantine/detector.js';
 import type { Result } from '../../core/types.js';
 import { Ok, Err } from '../../core/types.js';
 import { StorageError } from '../../core/errors.js';
+
+/**
+ * v2.1: Check if path is a symlink (for security - prevent traversal attacks)
+ */
+async function isSymlink(filePath: string): Promise<boolean> {
+  try {
+    const lstats = await lstat(filePath);
+    return lstats.isSymbolicLink();
+  } catch {
+    return false;
+  }
+}
 // Week 10: Performance optimization
 import { 
   measurePerformance, 
@@ -156,6 +168,7 @@ export interface ScanOptions {
   path?: string;
   exclude?: string[];
   showPreview?: boolean;
+  json?: boolean;  // v2.1: JSON output for CI/automation
 }
 
 /**
@@ -169,6 +182,11 @@ async function scanFile(
   const results: ScanResult[] = [];
   
   try {
+    // v2.1: Skip symlinks to prevent traversal attacks
+    if (await isSymlink(filePath)) {
+      return results;
+    }
+    
     // Week 10: Performance optimization - skip files > 5MB
     const stats = await stat(filePath);
     if (stats.size > 5 * 1024 * 1024) { // 5MB limit
@@ -838,6 +856,43 @@ export function formatScanResults(results: ScanResult[]): string {
 }
 
 /**
+ * v2.1: Format scan results as JSON for CI/automation
+ */
+export function formatScanResultsJSON(results: ScanResult[]): string {
+  const jsonOutput = {
+    version: '2.1.0',
+    timestamp: new Date().toISOString(),
+    summary: {
+      total: results.length,
+      byType: {
+        secret: results.filter(r => r.type === 'secret').length,
+        personal: results.filter(r => r.type === 'personal').length,
+        payment: results.filter(r => r.type === 'payment').length,
+        'browser-leak': results.filter(r => r.type === 'browser-leak').length,
+      },
+      byCategory: {} as Record<string, number>,
+    },
+    findings: results.map(r => ({
+      file: r.file,
+      line: r.line,
+      type: r.type,
+      pattern: r.pattern,
+      patternId: r.patternId,
+      category: r.category,
+      // Don't include preview in JSON for security
+    })),
+  };
+
+  // Count by category
+  for (const result of results) {
+    const category = result.category || 'Other';
+    jsonOutput.summary.byCategory[category] = (jsonOutput.summary.byCategory[category] || 0) + 1;
+  }
+
+  return JSON.stringify(jsonOutput, null, 2);
+}
+
+/**
  * Execute scan command
  */
 export async function executeScan(
@@ -847,8 +902,14 @@ export async function executeScan(
   const result = await scanProject(cwd, options);
   
   if (result.ok) {
-    const output = formatScanResults(result.value);
-    console.log(output);
+    // v2.1: JSON output for CI/automation
+    if (options.json) {
+      const jsonOutput = formatScanResultsJSON(result.value);
+      console.log(jsonOutput);
+    } else {
+      const output = formatScanResults(result.value);
+      console.log(output);
+    }
     
     // Exit with error code if issues found
     if (result.value.length > 0) {
@@ -857,7 +918,11 @@ export async function executeScan(
       process.exit(0);
     }
   } else {
-    console.error(`❌ Error scanning project: ${result.error.message}`);
+    if (options.json) {
+      console.log(JSON.stringify({ error: result.error.message }, null, 2));
+    } else {
+      console.error(`❌ Error scanning project: ${result.error.message}`);
+    }
     process.exit(2);
   }
 }

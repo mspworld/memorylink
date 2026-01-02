@@ -303,11 +303,13 @@ program
   .description('Scan entire project for secrets and personal data (real-time)')
   .option('-p, --path <path>', 'Path to scan (default: current directory)')
   .option('-e, --exclude <dirs>', 'Comma-separated directories to exclude', (value) => value.split(','))
+  .option('--json', 'Output results in JSON format (v2.1: for CI/automation)')
   .action(async (options) => {
     const { executeScan } = await import('./commands/scan.js');
     await executeScan(process.cwd(), {
       path: options.path,
       exclude: options.exclude,
+      json: options.json || false,
     });
   });
 
@@ -477,6 +479,20 @@ program
   .action(async () => {
     const { runSelfCheck } = await import('./commands/self-check.js');
     await runSelfCheck(process.cwd());
+  });
+
+// ml doctor command - v2.1: Health check with performance metrics
+program
+  .command('doctor')
+  .description('Run health check with optional performance analysis (v2.1)')
+  .option('--full', 'Run full diagnostics including performance benchmarks')
+  .option('--json', 'Output in JSON format')
+  .action(async (options) => {
+    const { runDoctor } = await import('./commands/doctor.js');
+    await runDoctor(process.cwd(), {
+      full: options.full || false,
+      json: options.json || false,
+    });
   });
 
 program.parse();

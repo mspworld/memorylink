@@ -5,6 +5,44 @@ All notable changes to MemoryLink will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-01-02
+
+### Added
+
+#### New Commands
+- **`ml doctor`**: Health check command with optional performance analysis
+  - `ml doctor` - Basic health checks
+  - `ml doctor --full` - Full diagnostics including benchmarks
+  - `ml doctor --json` - JSON output for automation
+
+#### Enhanced Scan Command
+- **`ml scan --json`**: JSON output format for CI/automation pipelines
+  - Structured output with summary and findings
+  - Category groupings for analysis
+  - Safe output (no secret previews)
+
+#### Security Hardening
+- **Symlink Protection**: Scanner now skips symbolic links to prevent traversal attacks
+- **Key Permissions**: Enhanced `ml self-check` verifies 600 permissions on encryption keys
+
+#### New Secret Patterns (16 new → 128 total)
+- **Database Services**: Supabase, PlanetScale, Turso, Neon, Upstash
+- **AI Services**: Replicate, Together AI, Groq, Perplexity
+- **Auth Services**: Clerk
+- **Email Services**: Resend
+- **India Payments**: PhonePe, Cashfree, Instamojo (expanded)
+
+### Changed
+- Pattern count increased from 112 to 128
+- Improved performance benchmarking in doctor command
+- Better error messages with JSON output support
+
+### Security
+- Symlinks are now safely skipped during scans
+- Enhanced key permission verification
+
+---
+
 ## [2.0.0] - 2026-01-02
 
 ### Added
@@ -148,6 +186,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+[2.1.0]: https://github.com/mspworld/memorylink/releases/tag/v2.1.0
 [2.0.0]: https://github.com/mspworld/memorylink/releases/tag/v2.0.0
 [1.0.0]: https://github.com/mspworld/memorylink/releases/tag/v1.0.0
 

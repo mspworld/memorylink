@@ -740,6 +740,97 @@ export const SECRET_PATTERNS: SecretPattern[] = [
     pattern: /(?:PAYTM|paytm).*?(?:merchant[_-]?key|MID)\s*[:=]\s*['"]?[a-zA-Z0-9]{16,}['"]?/i,
     description: 'Paytm merchant key',
   },
+  // v2.1: New patterns based on expert feedback
+  {
+    id: 'supabase-key',
+    name: 'Supabase API Key',
+    pattern: /sbp_[a-f0-9]{40}|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\.[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+/,
+    description: 'Supabase service role or anon key',
+  },
+  {
+    id: 'supabase-url',
+    name: 'Supabase Database URL',
+    pattern: /postgresql:\/\/postgres:[^@]+@[a-z0-9-]+\.supabase\.co:\d+\/postgres/i,
+    description: 'Supabase database connection string',
+  },
+  {
+    id: 'planetscale-token',
+    name: 'PlanetScale Database Token',
+    pattern: /pscale_tkn_[a-zA-Z0-9_-]{43}/,
+    description: 'PlanetScale database token',
+  },
+  {
+    id: 'upstash-token',
+    name: 'Upstash Redis Token',
+    pattern: /AX[a-zA-Z0-9]{34,}/,
+    description: 'Upstash Redis REST API token',
+  },
+  {
+    id: 'clerk-key',
+    name: 'Clerk API Key',
+    pattern: /sk_(?:live|test)_[a-zA-Z0-9]{24,}/,
+    description: 'Clerk authentication API key',
+  },
+  {
+    id: 'resend-key',
+    name: 'Resend API Key',
+    pattern: /re_[a-zA-Z0-9]{24,}/,
+    description: 'Resend email API key',
+  },
+  {
+    id: 'turso-token',
+    name: 'Turso Database Token',
+    pattern: /[a-zA-Z0-9_-]+\.turso\.io/,
+    description: 'Turso database URL or token',
+  },
+  {
+    id: 'neon-connection',
+    name: 'Neon Database Connection',
+    pattern: /postgres:\/\/[^:]+:[^@]+@[a-z0-9-]+\.neon\.tech/i,
+    description: 'Neon serverless Postgres connection string',
+  },
+  {
+    id: 'phonepe-key',
+    name: 'PhonePe Merchant Key (India)',
+    pattern: /(?:PHONEPE|phonepe).*?(?:merchant[_-]?(?:key|id)|salt[_-]?key)\s*[:=]\s*['"]?[a-zA-Z0-9-]{16,}['"]?/i,
+    description: 'PhonePe payment gateway key',
+  },
+  {
+    id: 'cashfree-key',
+    name: 'Cashfree API Key (India)',
+    pattern: /(?:CASHFREE|cashfree).*?(?:app[_-]?id|secret[_-]?key)\s*[:=]\s*['"]?[a-zA-Z0-9]{16,}['"]?/i,
+    description: 'Cashfree payment gateway credentials',
+  },
+  {
+    id: 'instamojo-key',
+    name: 'Instamojo API Key (India)',
+    pattern: /(?:INSTAMOJO|instamojo).*?(?:api[_-]?key|auth[_-]?token)\s*[:=]\s*['"]?[a-zA-Z0-9]{16,}['"]?/i,
+    description: 'Instamojo payment gateway key',
+  },
+  {
+    id: 'replicate-token',
+    name: 'Replicate API Token',
+    pattern: /r8_[a-zA-Z0-9]{37}/,
+    description: 'Replicate AI model API token',
+  },
+  {
+    id: 'together-key',
+    name: 'Together AI API Key',
+    pattern: /[a-f0-9]{64}/,
+    description: 'Together AI API key',
+  },
+  {
+    id: 'groq-key',
+    name: 'Groq API Key',
+    pattern: /gsk_[a-zA-Z0-9]{52}/,
+    description: 'Groq AI inference API key',
+  },
+  {
+    id: 'perplexity-key',
+    name: 'Perplexity API Key',
+    pattern: /pplx-[a-f0-9]{48}/,
+    description: 'Perplexity AI API key',
+  },
 ];
 
 /**
