@@ -17,7 +17,7 @@ import { formatGateResult, validateGateOutput } from '../../gate/formatter.js';
 import { appendAuditEvent } from '../../audit/logger.js';
 import { EXIT_CODES } from '../../core/exit-codes.js';
 // Week 8: Tiered gate system
-import { SeverityTier, getTierDescription, getTierExitCode } from '../../gate/severity.js';
+import { SeverityTier, getTierExitCode } from '../../gate/severity.js';
 import { isBypassed, createBypass } from '../../gate/bypass.js';
 // Week 8 Day 56: Gate modes
 import { scanChangedFiles } from '../../gate/diff.js';
